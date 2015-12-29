@@ -1,0 +1,27 @@
+Tile	Output		Total no.	Total no.	avg. latency	avg. latency	average
+ID	channel		of packets	of flits	per packet	per flit	throughput
+							(clock cycles)	(clock cycles)	(Gbps)
+0	South		6		18		2		0.666667		0.248105
+0	East		24		72		2		0.666667		0.323523
+0	Core		0		0		0		0		0
+1	South		9		27		4		1.33333		0.245455
+1	East		0		0		0		0		0
+1	West		0		0		0		0		0
+1	Core		15		45		4		1.33333		0.409091
+2	South		0		0		0		0		0
+2	West		0		0		0		0		0
+2	Core		0		0		0		0		0
+3	North		0		0		0		0		0
+3	East		6		18		4		1.33333		0.248276
+3	Core		0		0		0		0		0
+4	North		0		0		0		0		0
+4	East		1		3		4		1.33333		0.612245
+4	West		0		0		0		0		0
+4	Core		15		45		4		1.33333		0.410959
+5	North		0		0		0		0		0
+5	West		1		3		4		1.33333		0.625
+5	Core		0		0		0		0		0
+
+Overall average latency per channel (in clock cycles per flit) = 1.07359
+
+Overall average latency per channel(in clock cycles per packet) = 3.22078

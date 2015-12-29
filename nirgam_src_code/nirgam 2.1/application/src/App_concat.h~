@@ -1,0 +1,27 @@
+
+#ifndef _App_concat_H_
+#define _App_concat_H_
+
+#include "../../core/ipcore.h"
+#include <fstream>
+#include <string>
+#include <math.h>
+
+
+using namespace std;
+
+struct App_concat : public ipcore {
+	
+
+	SC_CTOR(App_concat);
+	
+
+	void send();			
+	void recv();			
+	void processing(flit);		
+	void send_concat_string(string concatenated_string);	
+	
+	string final;	
+};
+
+#endif

@@ -1,0 +1,35 @@
+
+
+#include "Q_router.h"
+#include "../../config/extern.h"
+
+void Q_router::setID(UI id_tile)
+{
+    id = id_tile;
+}
+
+UI Q_router::calc_next(UI ip_dir, ULL source_id, ULL dest_id)
+{
+
+    
+}
+void Q_router::update_estimate(UI ip_dir, UI dest_id, UI estimate, ULL q)
+{
+}
+
+UI Q_router::get_estimate(UI d)
+{
+}
+
+void Q_router::initialize()
+{
+}
+
+
+extern "C"
+{
+    router *maker()
+    {
+        return new Q_router;
+    }
+}

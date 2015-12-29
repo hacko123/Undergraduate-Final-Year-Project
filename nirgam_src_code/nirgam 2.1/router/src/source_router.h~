@@ -1,0 +1,24 @@
+
+#ifndef __src_router__
+#define __src_router__
+
+#include "../../core/router.h"
+
+class source_router : public router {
+	public:
+		
+		source_router() { }
+		
+		
+		UI calc_next(UI ip_dir, ULL source_id, ULL dest_id);
+		
+		void initialize();	
+		void setID(UI);		
+
+		UI get_estimate(UI d){}
+		void update_estimate(UI ip_dir, UI dest_id, UI estimate, ULL q){}
+		void update_power(int,double ){};
+};
+
+#endif
+

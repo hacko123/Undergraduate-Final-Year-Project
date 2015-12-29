@@ -1,0 +1,94 @@
+#include "App_concat.h"
+#include "../../config/extern.h"
+
+App_concat::App_concat(sc_module_name App_concat): ipcore(App_concat)
+{
+
+}
+
+void App_concat::send()
+{
+}
+
+void App_concat::recv()
+{
+    string data;
+	
+    while (true)
+    {
+        wait();	
+        if (flit_inport.event())
+        {
+		
+            flit flit_recd = flit_inport.read();	
+	    get_data(flit_recd, data);
+            cout<<"\ntime: "<<sc_time_stamp()<<" name: "<<this->name()<<" tile: "<<tileID<<" Recieved flit at core "<<flit_recd;        
+            cout<<"Recieved data: "<<data;
+
+            processing(flit_recd);	
+        }
+    }
+}
+
+void App_concat::processing(flit newflit)
+{
+    string data;
+    get_data(newflit, data);	
+    final = final + data + " ";	
+    cout<<"\ntime: "<<sc_time_stamp()<<" name: "<<this->name()<<" tile: "<<tileID<<" Processing flit at core "<<newflit;
+    cout<<"Concatenate, new data: "<<final<<endl;
+
+if (newflit.pkthdr.nochdr.flittype == TAIL || newflit.pkthdr.nochdr.flittype == HDT)
+    {
+        send_concat_string(final);	
+        final = string("\0");		
+    }
+    
+}
+
+void App_concat::send_concat_string(string temp_data)
+{
+    flit *flit_out;
+    string data;
+	int d2;
+string appln_filename = string("config/application.config");
+    ifstream fil1;
+    fil1.open(appln_filename.c_str());
+    if (!fil1.is_open())
+    {
+        cout<<"application.config does not exist"<<endl;
+    }
+    else
+    {
+        cout <<"Loading parameters from application.config file...";
+        while (!fil1.eof())
+        {
+            string name;
+		int value;
+            fil1 >> value ;
+		fil1 >> name;
+            if (name=="App_recv.so")
+            {
+                d2=value;
+            }
+
+	}
+
+	}
+    flit_out = create_hdt_flit(0,0,d2);
+    set_data(flit_out, temp_data);
+    get_data(*flit_out, data);
+    cout<<"\ntime: "<<sc_time_stamp()<<" name: "<<this->name()<<" tile: "<<tileID<<" Generating flit at core "<<*flit_out;
+    
+    cout<<"Sending data: "<<data<<endl;
+    flit_outport.write(*flit_out);
+}
+
+// for dynamic linking
+extern "C"
+{
+    ipcore *maker()
+    {
+        return new App_concat("App_concat");
+    }
+}
